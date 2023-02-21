@@ -9,16 +9,20 @@ To accomplish this, I created a WidgetValidator to register all the necessary fi
 At the view level, I change the color of the floating icon based on the validation status.
 
 First, initialize the Widget Validator by creating an instance of it:
+
 `WidgetValidator _widgetValidator = WidgetValidator(this);`
 
 Next, register the form fields that are required for validation using the registerWidgetForValidation() method:
+
 `_widgetValidator.registerWidgetForValidation(lastNameKey)`
 
 Then, on the onChanged event of a form field, if the specified condition is met, update the corresponding key using the `updateWidgetState()` method:
+
 `if (RegExp(r'^[a-z A-Z]+$').hasMatch(value)) {
     _widgetValidator.updateWidgetState(lastNameKey, true);
     } else {
     _widgetValidator.updateWidgetState(lastNameKey, false);
     }
 `
+
 Finally, once all the fields are validated, the `onAllWidgetValidationSuccess()` method will be called; otherwise, `onAllWidgetValidationFailed()` will be called.
