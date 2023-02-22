@@ -40,7 +40,6 @@ class UserNameInputField extends FormzInput<String, UserNameValidationError> {
     if (maxValue != null && value.length > int.parse(maxValue!)) {
       return UserNameValidationError.invalid;
     }
-    return UserNameValidationError.isNull;
   }
 }
 
