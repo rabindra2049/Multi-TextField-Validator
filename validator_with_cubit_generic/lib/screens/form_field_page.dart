@@ -86,17 +86,21 @@ class _RemarksInput extends StatelessWidget {
             print("ON TAP");
             _cubit.updateField('address', UserNameInputField.custom("Hello"));
           },
-          child: TextField(
+          child: TextFormField(
             enabled: false,
+            // controller: _controller,
             readOnly: true,
             key: const Key("personalInfoForm_remarksInput_textField"),
             onChanged: (value) {
               final name = OptionalInputField.dirty(value);
-              _cubit.updateField('remarks', name);
             },
-            decoration: const InputDecoration(
-              labelText: 'Select Data',
-              suffixIcon: Icon(Icons.arrow_drop_down)
+            decoration: InputDecoration(
+              suffixIcon: Icon(Icons.arrow_drop_down), //
+              labelText: 'Select Data Type',
+              disabledBorder: OutlineInputBorder(
+                borderRadius: const BorderRadius.all(Radius.circular(10)),
+                borderSide: BorderSide(color: Colors.grey.shade400),
+              ),
             ),
           ),
         );
@@ -106,13 +110,24 @@ class _RemarksInput extends StatelessWidget {
 }
 
 class _AddressInput extends StatelessWidget {
+  final TextEditingController _textEditingController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<GenericFormFieldCubit, GenericFormFieldState>(
       buildWhen: (previous, current) =>
           previous.formFields['address'] != current.formFields['address'],
       builder: (context, state) {
-        return TextField(
+        final currentValue = state.formFields['address']?.value;
+        final currentSelection =
+            TextSelection.collapsed(offset: currentValue.toString().length);
+        final editValue = TextEditingValue(
+          text: currentValue,
+          selection: currentSelection,
+        );
+        _textEditingController.value = editValue;
+        return TextFormField(
+          controller: _textEditingController,
           key: const Key('personalInfoForm_addressInput_textField'),
           onChanged: (value) {
             final name = UserNameInputField.custom(value,
@@ -122,8 +137,21 @@ class _AddressInput extends StatelessWidget {
                 maxValue: '20');
             _cubit.updateField('address', name);
           },
+          onTap: () {
+            // Get the current cursor position in the text field
+            final currentPosition =
+                _textEditingController.selection.base.offset;
+            final currentSelection = TextSelection.fromPosition(
+                TextPosition(offset: currentPosition));
+            // Update the text field value and cursor position
+            print("Current $currentSelection");
+            _textEditingController.value = editValue.copyWith(
+              selection: currentSelection,
+            );
+          },
           decoration: InputDecoration(
             labelText: 'Address',
+            hintText: 'Enter Address',
             errorText:
                 (state.formFields['address'] as UserNameInputField).invalid
                     ? (state.formFields['address'] as UserNameInputField)
