@@ -1,21 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
-import 'package:imepay_agent/common/validator/cubit/generic_form_field_cubit.dart';
-import 'package:imepay_agent/common/validator/cubit/generic_form_field_state.dart';
-import 'package:imepay_agent/common/validator/models/email_input_field.dart';
+import 'package:validator_with_cubit_generic/cubit/generic_form_field_cubit.dart';
+import 'package:validator_with_cubit_generic/cubit/generic_form_field_state.dart';
+import 'package:validator_with_cubit_generic/validator/models/email_input_field.dart';
 
 class EmailInput extends StatelessWidget {
   final GenericFormFieldCubit<FormzInput> cubit;
-  final String? errorMessage;
-  final String? requiredMessage;
   final String paramKey;
 
-  const EmailInput(this.cubit,
-      {super.key,
-      required this.paramKey,
-      this.errorMessage,
-      this.requiredMessage});
+  const EmailInput(this.cubit, {super.key, required this.paramKey});
 
   @override
   Widget build(BuildContext context) {
