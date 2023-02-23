@@ -10,7 +10,13 @@ class OptionalInputField
 
   @override
   OptionalFieldInputValidationError? validator(String value) {
-    return OptionalFieldInputValidationError.isNull;
+    if (value == null || value.isEmpty) {
+      return null;
+    }
+    if (value.trim().isEmpty) {
+      return OptionalFieldInputValidationError.isNull;
+    }
+    return null;
   }
 }
 
