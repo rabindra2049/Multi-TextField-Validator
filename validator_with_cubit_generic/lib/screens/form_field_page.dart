@@ -83,7 +83,7 @@ class _RemarksInput extends StatelessWidget {
       builder: (context, state) {
         return GestureDetector(
           onTap: () {
-            print("object");
+            print("ON TAP");
             _cubit.updateField('address', UserNameInputField.custom("Hello"));
           },
           child: TextField(
@@ -95,7 +95,8 @@ class _RemarksInput extends StatelessWidget {
               _cubit.updateField('remarks', name);
             },
             decoration: const InputDecoration(
-              labelText: 'Remarks',
+              labelText: 'Select Data',
+              suffixIcon: Icon(Icons.arrow_drop_down)
             ),
           ),
         );
