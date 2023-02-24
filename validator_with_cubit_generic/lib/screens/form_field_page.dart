@@ -83,10 +83,9 @@ class _RemarksInput extends StatelessWidget {
       builder: (context, state) {
         return GestureDetector(
           onTap: () {
-            print("ON TAP");
             _cubit.updateField('address', UserNameInputField.custom("Hello"));
           },
-          child: TextField(
+          child: TextFormField(
             enabled: false,
             readOnly: true,
             key: const Key("personalInfoForm_remarksInput_textField"),
@@ -95,9 +94,9 @@ class _RemarksInput extends StatelessWidget {
               _cubit.updateField('remarks', name);
             },
             decoration: const InputDecoration(
-              labelText: 'Select Data',
-              suffixIcon: Icon(Icons.arrow_drop_down)
-            ),
+                labelText: 'Select Data',
+                helperText: 'Clicking on this will set data on Address field',
+                suffixIcon: Icon(Icons.arrow_drop_down)),
           ),
         );
       },
@@ -106,13 +105,24 @@ class _RemarksInput extends StatelessWidget {
 }
 
 class _AddressInput extends StatelessWidget {
+  final TextEditingController _textEditingController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<GenericFormFieldCubit, GenericFormFieldState>(
       buildWhen: (previous, current) =>
           previous.formFields['address'] != current.formFields['address'],
       builder: (context, state) {
+        final currentValue = state.formFields['address']?.value;
+        TextSelection previousSelection = _textEditingController.selection;
+
+        final editValue = TextEditingValue(
+          text: currentValue,
+          selection: previousSelection,
+        );
+        _textEditingController.value = editValue;
         return TextField(
+          controller: _textEditingController,
           key: const Key('personalInfoForm_addressInput_textField'),
           onChanged: (value) {
             final name = UserNameInputField.custom(value,
