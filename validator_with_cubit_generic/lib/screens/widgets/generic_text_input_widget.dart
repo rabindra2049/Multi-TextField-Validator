@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
-import 'package:validator_with_cubit_generic/cubit/generic_form_field_cubit.dart';
-import 'package:validator_with_cubit_generic/cubit/generic_form_field_state.dart';
+import 'package:validator_with_cubit_generic/cubit/form/generic_form_field_cubit.dart';
+import 'package:validator_with_cubit_generic/cubit/form/generic_form_field_state.dart';
 import 'package:validator_with_cubit_generic/extension/number_extensions.dart';
-import 'package:validator_with_cubit_generic/validator/models/generic_text_input_field.dart';
+import 'package:validator_with_cubit_generic/models/validators/generic_text_input_field.dart';
 import 'package:validator_with_cubit_generic/screens/widgets/text_input.dart';
 
 class GenericTextInputWidget extends StatelessWidget {

@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:formz/formz.dart';
-import 'package:validator_with_cubit_generic/cubit/generic_form_field_state.dart';
+import 'package:validator_with_cubit_generic/cubit/form/generic_form_field_state.dart';
 
 /// Generic Cubit Class that handles the state of a set of Formz input fields.
 /// Accepts a map of initial form field values in its constructor, and initializes the state of the Cubit with this map.

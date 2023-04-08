@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
-import 'package:validator_with_cubit_generic/cubit/generic_form_field_cubit.dart';
+import 'package:validator_with_cubit_generic/cubit/form/generic_form_field_cubit.dart';
 import 'package:validator_with_cubit_generic/di.dart';
 import 'package:validator_with_cubit_generic/screens/form_based_home_screen.dart';
 

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
-import 'package:validator_with_cubit_generic/cubit/generic_form_field_cubit.dart';
-import 'package:validator_with_cubit_generic/cubit/generic_form_field_state.dart';
+import 'package:validator_with_cubit_generic/cubit/form/generic_form_field_cubit.dart';
+import 'package:validator_with_cubit_generic/cubit/form/generic_form_field_state.dart';
 import 'package:validator_with_cubit_generic/helper/form_field_key.dart';
 import 'package:validator_with_cubit_generic/screens/form_field_details_page.dart';
 import 'package:validator_with_cubit_generic/screens/widgets/generic_text_input_widget.dart';
-import 'package:validator_with_cubit_generic/validator/models/generic_text_input_field.dart';
+import 'package:validator_with_cubit_generic/models/validators/generic_text_input_field.dart';
 
 import 'widgets/generic_floating_button.dart';
 
@@ -63,12 +63,14 @@ onPressed(BuildContext context,
   state.formFields.forEach((key, v) {
     print("KEY : $key, Value : ${v.value}");
   });
-  Navigator.push(
-    context,
-    MaterialPageRoute(
-      builder: (context) => const FormFieldDetailsPage(),
-    ),
-  );
+  if (state.status.isValid) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const FormFieldDetailsPage(),
+      ),
+    );
+  }
 }
 
 Widget _buildFormFields(GenericFormFieldCubit<FormzInput> cubit) {
