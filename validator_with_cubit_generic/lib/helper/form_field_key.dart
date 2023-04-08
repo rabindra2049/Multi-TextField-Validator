@@ -3,4 +3,9 @@ enum FormFieldKey {
   email,
   name,
   remarks,
+
+  relation,
+  idType,
+  issueDate,
+  expiryDate
 }

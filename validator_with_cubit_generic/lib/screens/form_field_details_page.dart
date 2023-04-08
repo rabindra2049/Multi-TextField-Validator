@@ -4,20 +4,20 @@ import 'package:formz/formz.dart';
 import 'package:validator_with_cubit_generic/cubit/generic_form_field_cubit.dart';
 import 'package:validator_with_cubit_generic/cubit/generic_form_field_state.dart';
 import 'package:validator_with_cubit_generic/helper/form_field_key.dart';
-import 'package:validator_with_cubit_generic/screens/form_field_details_page.dart';
+import 'package:validator_with_cubit_generic/screens/widgets/generic_drop_down_widget.dart';
 import 'package:validator_with_cubit_generic/screens/widgets/generic_text_input_widget.dart';
 import 'package:validator_with_cubit_generic/validator/models/generic_text_input_field.dart';
 
 import 'widgets/generic_floating_button.dart';
 
-class FormFieldPage extends StatefulWidget {
-  const FormFieldPage({Key? key}) : super(key: key);
+class FormFieldDetailsPage extends StatefulWidget {
+  const FormFieldDetailsPage({Key? key}) : super(key: key);
 
   @override
-  State<FormFieldPage> createState() => _FormFieldPageState();
+  State<FormFieldDetailsPage> createState() => _FormFieldDetailsPageState();
 }
 
-class _FormFieldPageState extends State<FormFieldPage> {
+class _FormFieldDetailsPageState extends State<FormFieldDetailsPage> {
   late GenericFormFieldCubit cubit;
 
   @override
@@ -31,7 +31,7 @@ class _FormFieldPageState extends State<FormFieldPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text("Generic Form"),
+          title: const Text("Generic Form Details"),
         ),
         body: Padding(
           padding: const EdgeInsets.all(12.0),
@@ -47,15 +47,16 @@ class _FormFieldPageState extends State<FormFieldPage> {
 
 void updateField(GenericFormFieldCubit<FormzInput> cubit) {
   cubit.updateField(
-      FormFieldKey.address.name, const GenericTextInputField.pure());
+      FormFieldKey.relation.name, const GenericTextInputField.pure());
 
   cubit.updateField(
-      FormFieldKey.email.name, const GenericTextInputField.pure());
-
-  cubit.updateField(FormFieldKey.name.name, const GenericTextInputField.pure());
+      FormFieldKey.idType.name, const GenericTextInputField.pure());
 
   cubit.updateField(
-      FormFieldKey.remarks.name, const GenericTextInputField.optional());
+      FormFieldKey.issueDate.name, const GenericTextInputField.pure());
+
+  cubit.updateField(
+      FormFieldKey.expiryDate.name, const GenericTextInputField.pure());
 }
 
 onPressed(BuildContext context,
@@ -63,12 +64,6 @@ onPressed(BuildContext context,
   state.formFields.forEach((key, v) {
     print("KEY : $key, Value : ${v.value}");
   });
-  Navigator.push(
-    context,
-    MaterialPageRoute(
-      builder: (context) => const FormFieldDetailsPage(),
-    ),
-  );
 }
 
 Widget _buildFormFields(GenericFormFieldCubit<FormzInput> cubit) {
@@ -77,42 +72,42 @@ Widget _buildFormFields(GenericFormFieldCubit<FormzInput> cubit) {
       GenericTextInputWidget(
         cubit,
         keyboardType: TextInputType.text,
-        paramKey: FormFieldKey.address.name,
-        errorText: "Enter address",
-        requiredText: "Enter address",
-        label: "Address",
-        helperText: "Enter address",
+        paramKey: FormFieldKey.relation.name,
+        errorText: "Enter relation",
+        requiredText: "Enter relation",
+        label: "Relation",
+        helperText: "Enter relation",
         inputType: GenericTextInputType.GENERIC,
       ),
-      GenericTextInputWidget(
+      GenericDropDownWidget(
+        onTap: () {},
         cubit,
-        keyboardType: TextInputType.text,
-        paramKey: FormFieldKey.email.name,
-        errorText: "Enter email",
-        requiredText: "Enter email",
-        label: "Email",
-        helperText: "Enter email",
+        paramKey: FormFieldKey.idType.name,
+        errorText: "Select ID type",
+        requiredText: "Select ID type",
+        label: "ID type",
+        helperText: "Select ID type",
         inputType: GenericTextInputType.EMAIL,
       ),
       GenericTextInputWidget(
         cubit,
         keyboardType: TextInputType.text,
-        paramKey: FormFieldKey.name.name,
-        errorText: "Enter full name",
-        requiredText: "Enter full name",
-        label: "Full Name",
-        helperText: "Enter full name",
+        paramKey: FormFieldKey.issueDate.name,
+        errorText: "Enter issue date",
+        requiredText: "Enter issue date",
+        label: "Issue Date",
+        helperText: "Enter issue date",
         inputType: GenericTextInputType.GENERIC,
       ),
       GenericTextInputWidget(
         cubit,
         keyboardType: TextInputType.text,
-        paramKey: FormFieldKey.remarks.name,
-        errorText: "Enter remarks",
-        requiredText: "Enter remarks",
-        label: "Remarks",
-        helperText: "Enter remarks(Optional)",
-        inputType: GenericTextInputType.OPTIONAL,
+        paramKey: FormFieldKey.expiryDate.name,
+        errorText: "Enter expiry date",
+        requiredText: "Enter expiry date",
+        label: "Expiry Date",
+        helperText: "Enter expiry date",
+        inputType: GenericTextInputType.GENERIC,
       ),
     ],
   );
