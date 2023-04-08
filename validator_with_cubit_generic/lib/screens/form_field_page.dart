@@ -63,10 +63,18 @@ void updateField(GenericFormFieldCubit<FormzInput> cubit) {
 
   cubit.updateField(
       FormFieldKey.email.name, const GenericTextInputField.pure());
+
+  cubit.updateField(FormFieldKey.name.name, const GenericTextInputField.pure());
+
+  cubit.updateField(FormFieldKey.remarks.name, const GenericTextInputField.optional());
 }
 
 onPressed(BuildContext context,
-    GenericFormFieldState<FormzInput<dynamic, dynamic>> state) {}
+    GenericFormFieldState<FormzInput<dynamic, dynamic>> state) {
+      state.formFields.forEach((key, v) {
+        print("KEY : $key, Value : ${v.value}");
+      });
+}
 
 Widget _buildFormFields(GenericFormFieldCubit<FormzInput> cubit) {
   return Column(
@@ -90,6 +98,26 @@ Widget _buildFormFields(GenericFormFieldCubit<FormzInput> cubit) {
         label: "Email",
         helperText: "Enter email",
         inputType: GenericTextInputType.EMAIL,
+      ),
+      GenericTextInputWidget(
+        cubit,
+        keyboardType: TextInputType.text,
+        paramKey: FormFieldKey.name.name,
+        errorText: "Enter full name",
+        requiredText: "Enter full name",
+        label: "Full Name",
+        helperText: "Enter full name",
+        inputType: GenericTextInputType.GENERIC,
+      ),
+      GenericTextInputWidget(
+        cubit,
+        keyboardType: TextInputType.text,
+        paramKey: FormFieldKey.remarks.name,
+        errorText: "Enter remarks",
+        requiredText: "Enter remarks",
+        label: "Remarks",
+        helperText: "Enter remarks(Optional)",
+        inputType: GenericTextInputType.OPTIONAL,
       ),
     ],
   );

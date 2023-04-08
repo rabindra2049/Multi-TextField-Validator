@@ -1,5 +1,6 @@
 enum FormFieldKey {
   address,
   email,
-  idType
+  name,
+  remarks,
 }
