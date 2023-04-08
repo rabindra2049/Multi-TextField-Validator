@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:validator_with_cubit_generic/di.dart';
 import 'package:validator_with_cubit_generic/screens/form_based_home_screen.dart';
 
-void main() {
+void main() async {
+  await init();
   runApp(const MyApp());
 }
 
@@ -14,6 +16,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
+        useMaterial3: true,
         primarySwatch: Colors.blue,
       ),
       home: const FormBasedHomeScreen(),

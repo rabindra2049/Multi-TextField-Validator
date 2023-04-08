@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:formz/formz.dart';
+import 'package:validator_with_cubit_generic/cubit/generic_form_field_cubit.dart';
+import 'package:validator_with_cubit_generic/di.dart';
 import 'form_field_page.dart';
 
 class FormBasedHomeScreen extends StatelessWidget {
@@ -6,11 +10,9 @@ class FormBasedHomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        padding: const EdgeInsets.all(12.0),
-        child: FormFieldPage(),
-      ),
+    return BlocProvider(
+      create: (context) => getIt<GenericFormFieldCubit<FormzInput>>(),
+      child: const FormFieldPage(),
     );
   }
 }
