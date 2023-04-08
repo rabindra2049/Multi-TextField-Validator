@@ -3,24 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:validator_with_cubit_generic/cubit/generic_form_field_cubit.dart';
 import 'package:validator_with_cubit_generic/cubit/generic_form_field_state.dart';
-import 'package:validator_with_cubit_generic/di.dart';
-import 'package:validator_with_cubit_generic/extension/number_extensions.dart';
 import 'package:validator_with_cubit_generic/helper/form_field_key.dart';
 import 'package:validator_with_cubit_generic/screens/widgets/generic_text_input_widget.dart';
-import 'package:validator_with_cubit_generic/validator/models/email_input_field.dart';
 import 'package:validator_with_cubit_generic/validator/models/generic_text_input_field.dart';
-import 'package:validator_with_cubit_generic/validator/models/optional_input_field.dart';
-import 'package:validator_with_cubit_generic/validator/models/username_input_field.dart';
 
-import 'widgets/email_input_widget.dart';
 import 'widgets/generic_floating_button.dart';
-
-final _formFields = <String, FormzInput>{
-  'address': const UserNameInputField.pure(),
-  'remarks': const OptionalInputField.pure(),
-  'email': const EmailInputField.pure(),
-};
-final _cubit = GenericFormFieldCubit<FormzInput>(_formFields);
 
 class FormFieldPage extends StatefulWidget {
   const FormFieldPage({Key? key}) : super(key: key);
@@ -66,14 +53,15 @@ void updateField(GenericFormFieldCubit<FormzInput> cubit) {
 
   cubit.updateField(FormFieldKey.name.name, const GenericTextInputField.pure());
 
-  cubit.updateField(FormFieldKey.remarks.name, const GenericTextInputField.optional());
+  cubit.updateField(
+      FormFieldKey.remarks.name, const GenericTextInputField.optional());
 }
 
 onPressed(BuildContext context,
     GenericFormFieldState<FormzInput<dynamic, dynamic>> state) {
-      state.formFields.forEach((key, v) {
-        print("KEY : $key, Value : ${v.value}");
-      });
+  state.formFields.forEach((key, v) {
+    print("KEY : $key, Value : ${v.value}");
+  });
 }
 
 Widget _buildFormFields(GenericFormFieldCubit<FormzInput> cubit) {
