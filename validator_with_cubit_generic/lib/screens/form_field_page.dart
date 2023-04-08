@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:validator_with_cubit_generic/cubit/form/generic_form_field_cubit.dart';
 import 'package:validator_with_cubit_generic/cubit/form/generic_form_field_state.dart';
+import 'package:validator_with_cubit_generic/di.dart';
 import 'package:validator_with_cubit_generic/helper/form_field_key.dart';
 import 'package:validator_with_cubit_generic/screens/form_field_details_page.dart';
 import 'package:validator_with_cubit_generic/screens/widgets/generic_text_input_widget.dart';
@@ -67,7 +68,10 @@ onPressed(BuildContext context,
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => const FormFieldDetailsPage(),
+        builder: (context) => BlocProvider(
+          create: (context) => getIt<GenericFormFieldCubit<FormzInput>>(),
+          child: const FormFieldDetailsPage(),
+        ),
       ),
     );
   }
