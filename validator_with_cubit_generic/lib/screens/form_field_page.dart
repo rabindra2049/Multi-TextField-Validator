@@ -5,9 +5,9 @@ import 'package:validator_with_cubit_generic/cubit/form/generic_form_field_cubit
 import 'package:validator_with_cubit_generic/cubit/form/generic_form_field_state.dart';
 import 'package:validator_with_cubit_generic/di.dart';
 import 'package:validator_with_cubit_generic/helper/form_field_key.dart';
+import 'package:validator_with_cubit_generic/models/validators/generic_text_input_field.dart';
 import 'package:validator_with_cubit_generic/screens/form_field_details_page.dart';
 import 'package:validator_with_cubit_generic/screens/widgets/generic_text_input_widget.dart';
-import 'package:validator_with_cubit_generic/models/validators/generic_text_input_field.dart';
 
 import 'widgets/generic_floating_button.dart';
 
@@ -24,25 +24,28 @@ class _FormFieldPageState extends State<FormFieldPage> {
   @override
   void initState() {
     super.initState();
-    cubit = BlocProvider.of<GenericFormFieldCubit>(context);
+    cubit = getIt<GenericFormFieldCubit<FormzInput>>();
     updateField(cubit);
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: const Text("Generic Form"),
-        ),
-        body: Padding(
-          padding: const EdgeInsets.all(12.0),
-          child: _buildFormFields(cubit),
-        ),
-        floatingActionButton: GenericFloatingButton(
-          context,
-          "gme_pay_proceed",
-          onPressed: onPressed,
-        ));
+    return BlocProvider(
+      create: (context) => cubit,
+      child: Scaffold(
+          appBar: AppBar(
+            title: const Text("Generic Form"),
+          ),
+          body: Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: _buildFormFields(cubit),
+          ),
+          floatingActionButton: GenericFloatingButton(
+            context,
+            "gme_pay_proceed",
+            onPressed: onPressed,
+          )),
+    );
   }
 }
 

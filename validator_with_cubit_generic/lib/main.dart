@@ -22,10 +22,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         primarySwatch: Colors.blue,
       ),
-      home: BlocProvider(
-        create: (context) => getIt<GenericFormFieldCubit<FormzInput>>(),
-        child: const FormFieldPage(),
-      ),
+      home: const FormFieldPage(),
     );
   }
 }
