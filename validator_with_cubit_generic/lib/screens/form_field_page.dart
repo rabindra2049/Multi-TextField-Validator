@@ -42,7 +42,7 @@ class _FormFieldPageState extends State<FormFieldPage> {
           ),
           floatingActionButton: GenericFloatingButton(
             context,
-            "gme_pay_proceed",
+            "proceed_button",
             onPressed: onPressed,
           )),
     );
